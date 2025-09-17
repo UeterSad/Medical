@@ -1,0 +1,30 @@
+#配置数据库连接信息
+spring:
+  application:
+    name: Medical
+  datasource:
+    url: jdbc:mysql://localhost:3306/medical
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 523369
+  #配置oss上传文件大小限制
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 100MB
+#日期格式配置
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+#mybatis配置
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    #驼峰命名映射
+    map-underscore-to-camel-case: true
+#配置阿里云oss信息
+aliyun:
+  oss:
+    endpoint: https://oss-cn-beijing.aliyuncs.com
+    bucketName: java-web-levithan
+    region: cn-beijing

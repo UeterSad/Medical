@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.orgthirteen.Mapper.MedServMapper">
+    <update id="update">
+        update medical_service
+        <set>
+            <if test="medicalName != null and medicalName != ''">
+                medical_name = #{medicalName},
+            </if>
+            <if test="medicalType != null and medicalType != ''">
+                medical_type = #{medicalType},
+            </if>
+            <if test="medicalNumber != null">
+                medical_number = #{medicalNumber},
+            </if>
+            <if test="medicalInfo != null and medicalInfo != ''">
+                medical_info = #{medicalInfo},
+            </if>
+            <if test="medicalExclude != null and medicalExclude != ''">
+                medical_exclude = #{medicalExclude},
+            </if>
+            <if test="countryNumber != null and countryNumber != ''">
+                country_number = #{countryNumber},
+            </if>
+            <if test="medicalUnit != null and medicalUnit != ''">
+                medical_unit = #{medicalUnit},
+            </if>
+            <if test="medicalPrice != null">
+                medical_price = #{medicalPrice},
+            </if>
+            <if test="remark != null and remark != ''">
+                remark = #{remark}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <select id="list" resultType="com.orgthirteen.pojo.MedServ">
+        select * from medical_service e
+        <where>
+            <if test="medicalName!=null and medicalName !=''">
+                e.medical_name like concat('%',#{medicalName},'%')
+            </if>
+        </where> order by e.id desc
+    </select>
+    <delete id="delete">
+        delete from medical_service where id in
+        <foreach collection="list" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

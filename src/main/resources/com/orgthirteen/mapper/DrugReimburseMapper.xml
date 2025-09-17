@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.orgthirteen.Mapper.DrugReimburseMapper">
+    <update id="update" parameterType="com.orgthirteen.pojo.DrugReimburse"> <!-- 替换为DrugReimburse类的实际全路径 -->
+        update drug_reimbursement
+        <set>
+            <if test="drugReimbursementType != null and drugReimbursementType != ''">
+                drug_reimbursement_type = #{drugReimbursementType},
+            </if>
+            <if test="drugReimbursementProportion != null">
+                drug_reimbursement_proportion = #{drugReimbursementProportion},
+            </if>
+            <if test="drugReimbursementInfo != null and drugReimbursementInfo != ''">
+                drug_reimbursement_info = #{drugReimbursementInfo},
+            </if>
+            <if test="status != null">
+                status = #{status}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+</mapper>

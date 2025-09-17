@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.orgthirteen.Mapper.HospReimburseMapper">
+    <update id="update" parameterType="com.orgthirteen.pojo.HospReimburse"> <!-- 替换为HospReimburse类的实际全路径 -->
+        update hospital_reimbursement
+        <set>
+            <if test="minPayLevel != null">
+                min_pay_level = #{minPayLevel},
+            </if>
+            <if test="maxPayLevel != null">
+                max_pay_level = #{maxPayLevel},
+            </if>
+            <if test="peopleType != null and peopleType != ''">
+                people_type = #{peopleType},
+            </if>
+            <if test="payProportion != null">
+                pay_proportion = #{payProportion},
+            </if>
+            <if test="status != null">
+                status = #{status}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+</mapper>

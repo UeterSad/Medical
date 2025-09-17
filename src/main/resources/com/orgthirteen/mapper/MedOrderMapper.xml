@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.orgthirteen.Mapper.MedOrderMapper">
+    <insert id="add" parameterType="com.orgthirteen.pojo.OrderBase">
+        <if test="diagnosisId != null">
+            insert into inpatient_diagnosis (order_time, doctor_order, use_method, diagnosis_id, status, patient_id)
+            VALUES (#{orderTime}, #{doctorOrder}, #{useMethod}, #{diagnosisId}, 1, #{patientId})
+        </if>
+        <if test="medicalId != null">
+            insert into inpatient_medical (order_time, doctor_order, use_method, medical_id, status, patient_id)
+            VALUES (#{orderTime}, #{doctorOrder}, #{useMethod}, #{medicalId}, 1, #{patientId})
+        </if>
+        <if test="drugId != null">
+            insert into inpatient_drugs (start_time, end_time, doctor_order, order_number, use_method, drug_id, status, patient_id)
+            VALUES (#{startTime}, #{endTime}, #{doctorOrder}, #{orderNumber}, #{useMethod}, #{drugId}, 1, #{patientId})
+        </if>
+    </insert>
+</mapper>

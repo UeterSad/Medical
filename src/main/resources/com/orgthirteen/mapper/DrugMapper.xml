@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.orgthirteen.Mapper.DrugMapper">
+    <select id="list" resultType="com.orgthirteen.pojo.Drugs">
+        select * from drug_info e
+        <where>
+            <if test="drugName!=null and drugName !=''">
+                e.china_name like concat('%',#{drugName},'%')
+            </if>
+        </where>
+    </select>
+    <delete id="delete">
+            delete from drug_info where id in
+    <foreach collection="list" item="id" open="(" separator="," close=")">
+                #{id}
+    </foreach>
+    </delete>
+    <update id="update" parameterType="com.orgthirteen.pojo.Drugs">
+        update drug_info
+        <set>
+            <if test="chinaName != null and chinaName != ''">
+                china_name = #{chinaName},
+            </if>
+            <if test="drugPrice != null">
+                drug_price = #{drugPrice},
+            </if>
+            <if test="insuranceType != null and insuranceType != ''">
+                insurance_type = #{insuranceType},
+            </if>
+            <if test="goodsName != null and goodsName != ''">
+                goods_name = #{goodsName},
+            </if>
+            <if test="specifications != null and specifications != ''">
+                specifications = #{specifications},
+            </if>
+            <if test="drugUnit != null and drugUnit != ''">
+                drug_unit = #{drugUnit},
+            </if>
+            <if test="drugManufacturer != null and drugManufacturer != ''">
+                drug_manufacturer = #{drugManufacturer},
+            </if>
+            <if test="remarks != null and remarks != ''">
+                remarks = #{remarks}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+</mapper>

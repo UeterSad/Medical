@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.orgthirteen.Mapper.ExpReimburseMapper">
+    <select id="find" resultType="com.orgthirteen.pojo.RegistrPatient">
+        SELECT * FROM patient_registration p
+        <where>
+            <if test="realName != null and realName != ''">
+                p.real_name LIKE CONCAT('%', #{realName}, '%')
+            </if>
+        AND p.regist_method = '1'
+        </where>
+    </select>
+    <select id="getFee" resultType="java.math.BigDecimal">
+        select sum(drug_price) from drug_info where id in (select drug_id from inpatient_drugs where patient_id = #{patientId}) GROUP BY insurance_type
+        UNION ALL
+        select SUM(medical_price) FROM medical_service where id in (select medical_id from inpatient_medical where patient_id = #{patientId})
+        UNION ALL
+        select SUM(medical_price) FROM diagnosis_treatment where id in (select diagnosis_id from inpatient_diagnosis where patient_id = #{patientId})
+    </select>
+    <select id="getDrugData" resultType="java.util.Map">
+        select insurance_type drugType,sum(drug_price) price from drug_info where id in (select drug_id from inpatient_drugs where patient_id = #{patientId}) GROUP BY insurance_type
+    </select>
+    <select id="getDividedFee" resultType="java.math.BigDecimal">
+        select sum(drug_price) from drug_info where id in (select drug_id from inpatient_drugs where patient_id = #{patientId})
+        UNION ALL
+        select SUM(medical_price) FROM medical_service where id in (select medical_id from inpatient_medical where patient_id = #{patientId})
+        UNION ALL
+        select SUM(medical_price) FROM diagnosis_treatment where id in (select diagnosis_id from inpatient_diagnosis where patient_id = #{patientId})
+    </select>
+</mapper>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.orgthirteen.Mapper.RegistrPatientMapper">
+    <select id="findPatients" resultType="com.orgthirteen.pojo.RegistrPatient">
+        select * from patient_registration e
+        <where>
+            <if test="realName!=null and realName !=''">
+                e.real_name like concat('%',#{realName},'%')
+            </if>
+        </where>
+    </select>
+</mapper>
