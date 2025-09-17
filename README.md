@@ -23,3 +23,4 @@
 - 实现医疗业务流程数字化，提升医院运营效率40%
 - 采用MyBatis驼峰映射，简化数据库字段到对象的转换
 - 通过Jackson定制化日期格式，统一前后端时间格式处理
+![image] https://github.com/UeterSad/Medical/blob/master/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-09-17%20214240.png
